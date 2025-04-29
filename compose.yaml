@@ -1,0 +1,15 @@
+services:
+  app:
+    container_name: gitlab-access-checker-app
+    image: dockette/web:php-83
+    ports:
+      - "8088:80"
+    networks:
+      - gitlab-access-checker-net
+    volumes:
+      - .:/srv
+    env_file:
+      - .env
+
+networks:
+  gitlab-access-checker-net:

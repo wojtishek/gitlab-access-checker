@@ -1,0 +1,17 @@
+services:
+	- App\Core\RouterFactory::createRouter
+	gitlabFactory: App\Core\Service\GitlabService(%env.GITLAB_TOKEN%)
+
+search:
+	-	in: %appDir%
+		classes:
+			- *Facade
+			- *Factory
+			- *Repository
+			- *Service
+
+extensions:
+	guzzle: Contributte\Guzzlette\DI\GuzzleExtension
+
+guzzle:
+	debug: true

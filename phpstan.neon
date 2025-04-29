@@ -1,0 +1,12 @@
+includes:
+    - vendor/phpstan/phpstan-nette/extension.neon
+
+parameters:
+    scanDirectories:
+        - app
+    paths:
+        - app
+
+    level: 5
+    tips:
+        treatPhpDocTypesAsCertain: false

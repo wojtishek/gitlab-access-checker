@@ -1,0 +1,19 @@
+{block content}
+<div class="py-5">
+    <h1>Gitlab group access search</h1>
+    {control gitlabSearchForm}
+</div>
+
+{snippet searchResult}
+<div n:ifset="$searchResult">
+    <div n:foreach="$searchResult as $result">
+        <p>{$result->name} (@{$result->username})<br>
+            Groups: [<span n:if="$result->groups" n:foreach="$result->groups as $group">{$group->fullPath} ({$accessLevels[$group->accessLevel]}){if !$iterator->last}, {/if}</span>]
+        <br>
+            Projects: [<span n:if="$result->projects" n:foreach="$result->projects as $project">{$project->pathWithNamespace} ({$accessLevels[$project->accessLevel]}){if !$iterator->last}, {/if}</span>]
+        </p>
+        <hr>
+    </div>
+    <div>Total Users: {count($searchResult)}</div>
+</div>
+{/snippet}
