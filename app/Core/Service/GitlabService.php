@@ -48,7 +48,29 @@ class GitlabService
 		return $this->request('GET', "projects/$gitlabProjectId/members");
 	}
 
-	private function request(string $method, string $endpoint, array $options = []): array
+    /**
+     * Sends HTTP request to GitLab API with automatic pagination handling
+     *
+     * @param string $method HTTP method (GET, POST, etc.)
+     * @param string $endpoint API endpoint path
+     * @param array $options Additional request options
+     *
+     * @return array{
+     *     data: array,
+     *     pagination: array{
+     *         page: string|null,
+     *         per_page: string|null,
+     *         total: string|null,
+     *         total_pages: string|null
+     *     },
+     *     all_pages_fetched: bool,
+     *     error?: string,
+     *     type?: class-string,
+     *     code?: int
+     * }
+     *
+     */
+    private function request(string $method, string $endpoint, array $options = []): array
 	{
 		$options = array_merge($this->baseHeaders(), $options);
 		$uri = $this->buildApiUrl($endpoint);
